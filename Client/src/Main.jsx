@@ -1,16 +1,24 @@
 import React, { Component } from 'react'
-import { Switch, Route, Link } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 
-import Tasks from './Tasks.jsx'
-import Users from './Users.jsx'
+import { PrivateRoute } from './Auth'
+import Tasks from './Tasks'
+import Users from './Users'
+import Login from './Login'
+import NewTask from './NewTask';
 
 class Main extends Component {
   render() {
     return (
+      <div>
       <Switch>
-        <Route path='/tasks' component={Tasks} />
-        <Route path='/users' component={Users} />
+        <PrivateRoute path='/tasks/new' component={NewTask}/>
+        <PrivateRoute path='/tasks' component={Tasks} />
+        <PrivateRoute path='/users' component={Users} />
+        <Route path='/login' component={Login} />
+        <Redirect from="/" to="/tasks" />
       </Switch>
+      </div>
     )
   }
 }
