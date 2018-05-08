@@ -1,8 +1,10 @@
 from flask import Flask, jsonify, request
 from service import Service, InvalidUsage
 from db.db import db, Task, User
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 service = Service()
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tasks.sqlite'
 
